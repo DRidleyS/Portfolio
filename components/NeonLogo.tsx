@@ -13,11 +13,13 @@ export default function NeonLogo({
   size = "md",
 }: NeonLogoProps) {
   const neonRef = useRef<HTMLDivElement>(null);
+  const flickerTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!neonRef.current) return;
 
     const flicker = () => {
+      if (!neonRef.current) return;
       const tl = gsap.timeline();
 
       // Random flicker pattern
@@ -44,15 +46,21 @@ export default function NeonLogo({
 
       // Random delay before next flicker (3-8 seconds)
       const nextFlicker = 3000 + Math.random() * 5000;
-      setTimeout(flicker, nextFlicker);
+      flickerTimeoutRef.current = window.setTimeout(flicker, nextFlicker);
     };
 
     // Start flickering after initial delay
-    const initialDelay = setTimeout(flicker, 2000);
+    flickerTimeoutRef.current = window.setTimeout(flicker, 2000);
 
     return () => {
-      clearTimeout(initialDelay);
+      if (flickerTimeoutRef.current) {
+        window.clearTimeout(flickerTimeoutRef.current);
+      }
+      if (neonRef.current) {
+        gsap.killTweensOf(neonRef.current);
+      }
     };
+  }, []);
   }, []);
 
   const sizeClasses = {
