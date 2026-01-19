@@ -41,7 +41,7 @@ export default function DirtyAir() {
       const wobble = Math.random() * 30 + 20; // wobble amplitude
 
       let wobbleAnim;
-      
+
       gsap.to(particle, {
         y: -(window.innerHeight + 100),
         x: `+=${drift}`,
@@ -62,6 +62,7 @@ export default function DirtyAir() {
         yoyo: true,
         ease: "sine.inOut",
       });
+    };
 
     // Create initial batch of particles
     for (let i = 0; i < 30; i++) {

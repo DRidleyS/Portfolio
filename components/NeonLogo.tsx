@@ -61,7 +61,6 @@ export default function NeonLogo({
       }
     };
   }, []);
-  }, []);
 
   const sizeClasses = {
     sm: "text-2xl sm:text-3xl",
