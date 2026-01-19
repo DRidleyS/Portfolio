@@ -131,10 +131,10 @@ export default function GlobalNavShifter() {
             router.push("/contact");
           } else if (route === "resume") {
             // Open resume in new tab or navigate to resume page
-            window.open("/resume.pdf", "_blank");
+            window.open("/resume.pdf", "_blank", "noopener,noreferrer");
             fadeFromBlack();
           } else if (route === "github") {
-            window.open("https://github.com/DRidleyS", "_blank");
+            window.open("https://github.com/DRidleyS", "_blank", "noopener,noreferrer");
             fadeFromBlack();
           }
         },
