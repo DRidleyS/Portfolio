@@ -15,7 +15,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "TypeScript", "AI Integration", "VIN API", "PostgreSQL"],
     github: null,
     demo: null,
-    images: ["bumperbookdesktop.png"],
+    images: ["/bumperbookdesktop.png"],
   },
   {
     title: "DS Auto Care",
