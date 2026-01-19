@@ -40,7 +40,7 @@ export default function DirtyAir() {
       const drift = (Math.random() - 0.5) * 200; // -100 to 100px horizontal drift
       const wobble = Math.random() * 30 + 20; // wobble amplitude
 
-      let wobbleAnim;
+      let wobbleAnim: gsap.core.Tween | undefined;
 
       gsap.to(particle, {
         y: -(window.innerHeight + 100),
