@@ -40,6 +40,8 @@ export default function DirtyAir() {
       const drift = (Math.random() - 0.5) * 200; // -100 to 100px horizontal drift
       const wobble = Math.random() * 30 + 20; // wobble amplitude
 
+      let wobbleAnim;
+      
       gsap.to(particle, {
         y: -(window.innerHeight + 100),
         x: `+=${drift}`,
@@ -47,19 +49,19 @@ export default function DirtyAir() {
         duration: duration,
         ease: "none",
         onComplete: () => {
+          wobbleAnim?.kill();
           particle.remove();
         },
       });
 
       // Add subtle horizontal wobble
-      gsap.to(particle, {
+      wobbleAnim = gsap.to(particle, {
         x: `+=${wobble}`,
         duration: Math.random() * 3 + 2,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
       });
-    };
 
     // Create initial batch of particles
     for (let i = 0; i < 30; i++) {
