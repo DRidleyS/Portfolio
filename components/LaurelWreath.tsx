@@ -1,8 +1,14 @@
 "use client";
 
-export default function LaurelWreath() {
+export default function LaurelWreath({
+  className = "",
+}: {
+  className?: string;
+}) {
   return (
-    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-6xl pointer-events-none">
+    <div
+      className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-6xl pointer-events-none ${className}`}
+    >
       <svg
         viewBox="0 0 1400 500"
         fill="none"
