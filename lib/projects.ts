@@ -14,7 +14,7 @@ export const projects: Project[] = [
       "BumperBook is an early stage prototype for an AI-powered vehicle history value service and social platform.",
     tech: ["Next.js", "TypeScript", "AI Integration", "VIN API", "PostgreSQL"],
     github: null,
-    demo: null,
+    demo: "https://bumperbook.net",
     images: ["/bumperbookdesktop.png"],
   },
   {
@@ -23,7 +23,7 @@ export const projects: Project[] = [
       "My auto styling business's website built with Python Flask backend and modern frontend technologies. Features service showcases, booking system, and responsive design.",
     tech: ["Python Flask", "JavaScript", "HTML5", "CSS3", "SCSS"],
     github: "https://github.com/DRidleyS/portfo",
-    demo: null,
+    demo: "https://dsautocare.com",
     images: ["/DSAutoCare.png"],
   },
   {
@@ -32,7 +32,7 @@ export const projects: Project[] = [
       "Elims company website showcasing professional services with modern design and responsive layouts.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/DRidleyS/eCapture",
-    demo: null,
+    demo: "https://ecapture.online",
     images: [
       "/ecaptured (1).gif",
       "/ecaptured.png",
@@ -46,7 +46,7 @@ export const projects: Project[] = [
       "Learning creative UX design by imitating the most visually persuasive product page in modern times. Advanced GSAP animations and scroll-triggered effects.",
     tech: ["JavaScript", "GSAP", "HTML5", "CSS3"],
     github: "https://github.com/DRidleyS/gsap_apple_webp",
-    demo: null,
+    demo: "https://dridleys.github.io/gsap_apple_webp/",
     images: [
       "/gsap_apple1.png",
       "/gsap_apple2.png",
