@@ -33,12 +33,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/DRidleyS/eCapture",
     demo: "https://ecapture.online",
-    images: [
-      "/ecaptured (1).gif",
-      "/ecaptured.png",
-      "/ecaptured1.png",
-      "/ecaptured.gif",
-    ],
+    images: ["/ecaptured.png", "/ecaptured1.png", "/ecaptured.gif"],
   },
   {
     title: "GSAP Apple Website",
