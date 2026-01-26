@@ -61,7 +61,7 @@ function FlagCard({
       amplitude: 0.25 + random(3) * 0.15, // 0.25-0.40 - much bigger waves
       gradient: [
         // Color gradients based on index
-        ["#ff6600", "#cc0000"], // orange-red
+        ["#000000", "#ffffff"], // black-white for the first flag
         ["#4444ff", "#8800ff"], // blue-purple
         ["#00ff88", "#00ccaa"], // green-teal
         ["#ffaa00", "#ff6600"], // yellow-orange
@@ -97,7 +97,7 @@ function FlagCard({
       0,
       canvas.width / 2,
       canvas.height / 2,
-      canvas.width * 0.6
+      canvas.width * 0.6,
     );
     radialGrad.addColorStop(0, "rgba(255, 255, 255, 0.15)");
     radialGrad.addColorStop(0.5, "rgba(255, 255, 255, 0.05)");
@@ -221,7 +221,7 @@ function FlagCard({
       0,
       0,
       canvas.width,
-      canvas.height
+      canvas.height,
     );
     bgGradient.addColorStop(0, "#000000");
     bgGradient.addColorStop(0.3, "#0a0a0a");
@@ -237,7 +237,7 @@ function FlagCard({
       0,
       canvas.width / 2,
       canvas.height / 2,
-      canvas.width * 0.7
+      canvas.width * 0.7,
     );
     radialGradient.addColorStop(0, flagParams.gradient[0] + "33");
     radialGradient.addColorStop(0.5, flagParams.gradient[1] + "22");
@@ -270,7 +270,7 @@ function FlagCard({
       imgX,
       imgY,
       imgX,
-      imgY + imgHeight
+      imgY + imgHeight,
     );
     imgPlaceholderGradient.addColorStop(0, "#1a1a1a");
     imgPlaceholderGradient.addColorStop(1, "#0a0a0a");
@@ -357,7 +357,7 @@ function FlagCard({
       infoX,
       yPos - 20,
       infoX,
-      yPos + 60
+      yPos + 60,
     );
     titleGradient.addColorStop(0, flagParams.gradient[0]);
     titleGradient.addColorStop(1, flagParams.gradient[1]);
@@ -402,7 +402,7 @@ function FlagCard({
       infoX,
       yPos,
       canvas.width - 30,
-      yPos
+      yPos,
     );
     dividerGradient.addColorStop(0, "transparent");
     dividerGradient.addColorStop(0.2, flagParams.gradient[0]);
@@ -456,7 +456,7 @@ function FlagCard({
         yPos - pillHeight / 2 + 2,
         pillWidth,
         pillHeight,
-        13
+        13,
       );
       ctx.fill();
 
@@ -465,7 +465,7 @@ function FlagCard({
         techX,
         yPos - pillHeight / 2,
         techX,
-        yPos + pillHeight / 2
+        yPos + pillHeight / 2,
       );
       pillGradient.addColorStop(0, flagParams.gradient[0] + "66");
       pillGradient.addColorStop(1, flagParams.gradient[1] + "44");
@@ -509,7 +509,7 @@ function FlagCard({
           buttonX,
           buttonY - 16,
           buttonX,
-          buttonY + 16
+          buttonY + 16,
         );
         btnGradient.addColorStop(0, flagParams.gradient[0]);
         btnGradient.addColorStop(1, flagParams.gradient[1]);
@@ -574,7 +574,7 @@ function FlagCard({
       context: CanvasRenderingContext2D,
       text: string,
       maxWidth: number,
-      lineHeightOffset: number = 0
+      lineHeightOffset: number = 0,
     ): string[] {
       const words = text.split(" ");
       const lines: string[] = [];
@@ -700,7 +700,7 @@ function FlagCard({
       uFlipProgress: { value: 0.0 },
       uEmissive: { value: 0.0 },
     }),
-    [flagParams, frontTexture, backTexture]
+    [flagParams, frontTexture, backTexture],
   );
 
   useFrame(({ clock }, delta) => {
@@ -725,7 +725,7 @@ function FlagCard({
         target: number,
         velocity: number,
         stiffness: number,
-        damping: number
+        damping: number,
       ) => {
         const force = (target - current) * stiffness;
         velocity += force * clampedDelta;
@@ -746,7 +746,7 @@ function FlagCard({
         targetStretch,
         state.scaleVelocity,
         2, // Extremely low stiffness for ultra-smooth start
-        0.95 // Very high damping to prevent any snap
+        0.95, // Very high damping to prevent any snap
       );
       state.stretchProgress = stretchResult.value;
       state.scaleVelocity = stretchResult.velocity;
@@ -817,7 +817,7 @@ function FlagCard({
       meshRef.current.scale.set(
         scaleX + breathing,
         scaleY + breathing * 0.5,
-        scaleZ
+        scaleZ,
       );
 
       // Simplified wobble

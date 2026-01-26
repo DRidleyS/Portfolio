@@ -9,18 +9,18 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "BumperBook",
+    title: "Starlet Tattoos",
     description:
-      "BumperBook is an early stage prototype for an AI-powered vehicle history value service and social platform.",
-    tech: ["Next.js", "TypeScript", "AI Integration", "VIN API", "PostgreSQL"],
+      "StarletTattoos.ink is a modern tattoo studio website built with Next.js and GSAP. It features a honeycomb gallery and a booking system.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
     github: null,
-    demo: "https://bumperbook.net",
-    images: ["/bumperbookdesktop.png"],
+    demo: "https://starlettattoos.ink",
+    images: ["/starletslander.png", "/starletsgallery.png"],
   },
   {
     title: "DS Auto Care",
     description:
-      "My auto styling business's website built with Python Flask backend and modern frontend technologies. Features service showcases, booking system, and responsive design.",
+      "My auto styling business's website built with Python Flask backend and modern frontend technologies. Features service showcases, booking system, and responsive design. + real-time pricing engine for 131,000 combinations, providing live quote generation",
     tech: ["Python Flask", "JavaScript", "HTML5", "CSS3", "SCSS"],
     github: "https://github.com/DRidleyS/portfo",
     demo: "https://dsautocare.com",
@@ -34,6 +34,15 @@ export const projects: Project[] = [
     github: "https://github.com/DRidleyS/eCapture",
     demo: "https://ecapture.online",
     images: ["/ecaptured.png", "/ecaptured1.png", "/ecaptured.gif"],
+  },
+  {
+    title: "BumperBook",
+    description:
+      "BumperBook is an early stage prototype for an AI-powered vehicle history value service and social platform.",
+    tech: ["Next.js", "TypeScript", "AI Integration", "VIN API", "PostgreSQL"],
+    github: null,
+    demo: "https://bumperbook.net",
+    images: ["/bumperbookdesktop.png"],
   },
   {
     title: "GSAP Apple Website",

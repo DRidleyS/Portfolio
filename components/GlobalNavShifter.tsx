@@ -110,10 +110,24 @@ export default function GlobalNavShifter() {
   const navigateToRoute = (route: Route) => {
     if (isFading) return;
 
+    // For resume and github, open immediately on user gesture (fixes mobile popup blocking)
+    if (route === "resume") {
+      window.open("/resume.pdf", "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (route === "github") {
+      window.open(
+        "https://github.com/DRidleyS",
+        "_blank",
+        "noopener,noreferrer",
+      );
+      return;
+    }
+
     setIsFading(true);
     setCurrentRoute(route);
 
-    // Fade to black
+    // Fade to black for internal routes
     if (fadeOverlayRef.current) {
       gsap.to(fadeOverlayRef.current, {
         opacity: 1,
@@ -129,13 +143,6 @@ export default function GlobalNavShifter() {
             router.push("/about");
           } else if (route === "contact") {
             router.push("/contact");
-          } else if (route === "resume") {
-            // Open resume in new tab or navigate to resume page
-            window.open("/resume.pdf", "_blank", "noopener,noreferrer");
-            fadeFromBlack();
-          } else if (route === "github") {
-            window.open("https://github.com/DRidleyS", "_blank", "noopener,noreferrer");
-            fadeFromBlack();
           }
         },
       });
