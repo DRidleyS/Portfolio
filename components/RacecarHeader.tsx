@@ -282,14 +282,14 @@ export default function RacecarHeader() {
   }, []);
 
   useEffect(() => {
-    // Update CSS variable for name color based on switches
-    let nameColor = "#eab308"; // default yellow-500
+    // Additive color mixing with red base
+    let nameColor = "#ef4444"; // red base
     if (switch1On && switch2On) {
-      nameColor = "#22c55e"; // green-500 when both on
-    } else if (switch2On) {
-      nameColor = "#3b82f6"; // blue-500
+      nameColor = "#ffffff"; // red + yellow + blue = white
     } else if (switch1On) {
-      nameColor = "#eab308"; // yellow-500
+      nameColor = "#f97316"; // red + yellow = orange
+    } else if (switch2On) {
+      nameColor = "#a855f7"; // red + blue = purple
     }
     document.documentElement.style.setProperty("--name-color", nameColor);
   }, [switch1On, switch2On]);
