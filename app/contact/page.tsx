@@ -59,7 +59,7 @@ export default function ContactPage() {
             Get In Touch
           </h1>
           <p className="text-lg text-neutral-300">
-            Let's discuss your next project or opportunity
+            Don't be shy! Whether you have a question, want to collaborate, or just want to say hi, I'm all ears. Fill out the form below and I'll get back to you as soon as I can.
           </p>
         </div>
 
@@ -131,7 +131,7 @@ export default function ContactPage() {
                 setFormData({ ...formData, message: e.target.value })
               }
               className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 text-white focus:border-red-500 focus:outline-none transition-colors resize-none"
-              placeholder="Tell me about your project, or why you want me on your team..."
+              placeholder="How can I help you?"
             />
           </div>
 

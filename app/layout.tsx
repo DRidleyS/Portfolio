@@ -1,8 +1,21 @@
 "use client";
 
 import "../styles/globals.css";
+import { Poppins, Roboto } from "next/font/google";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-roboto",
+});
 import S2KTransition, {
   S2KTransitionHandle,
 } from "../components/S2kTransition";
@@ -80,7 +93,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${poppins.variable} ${roboto.variable}`}>
       <body>
         <DirtyAir />
         <S2KTransition ref={transitionRef} />
