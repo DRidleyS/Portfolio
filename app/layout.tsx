@@ -62,18 +62,18 @@ export default function RootLayout({
 
       if (mobile && !isPortrait && onProjects) {
         if (!document.fullscreenElement && !doc.webkitFullscreenElement) {
+          const applyScrollFallback = () => {
+            document.body.style.minHeight = "calc(100vh + 60px)";
+            galleryScrollHideActive.current = true;
+            // Scroll aggressively after orientation settles to collapse address bar
+            setTimeout(() => window.scrollTo(0, 60), 300);
+            setTimeout(() => window.scrollTo(0, 60), 600);
+          };
           if (el.requestFullscreen) {
-            el.requestFullscreen().catch(() => {
-              // Fullscreen rejected — scroll to hide address bar instead
-              document.body.style.minHeight = "calc(100vh + 1px)";
-              galleryScrollHideActive.current = true;
-              setTimeout(() => window.scrollTo(0, 1), 100);
-            });
+            el.requestFullscreen().catch(applyScrollFallback);
           } else {
             // No Fullscreen API (e.g. iOS Safari) — scroll to hide address bar
-            document.body.style.minHeight = "calc(100vh + 1px)";
-            galleryScrollHideActive.current = true;
-            setTimeout(() => window.scrollTo(0, 1), 100);
+            applyScrollFallback();
           }
         }
       } else {
