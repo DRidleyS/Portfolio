@@ -36,6 +36,7 @@ export default function RootLayout({
   const [showRotatePrompt, setShowRotatePrompt] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const galleryScrollHideActive = useRef(false);
 
   useEffect(() => {
     setShowContent(false);
@@ -65,18 +66,23 @@ export default function RootLayout({
             el.requestFullscreen().catch(() => {
               // Fullscreen rejected — scroll to hide address bar instead
               document.body.style.minHeight = "calc(100vh + 1px)";
+              galleryScrollHideActive.current = true;
               setTimeout(() => window.scrollTo(0, 1), 100);
             });
           } else {
             // No Fullscreen API (e.g. iOS Safari) — scroll to hide address bar
             document.body.style.minHeight = "calc(100vh + 1px)";
+            galleryScrollHideActive.current = true;
             setTimeout(() => window.scrollTo(0, 1), 100);
           }
         }
       } else {
-        // Reset scroll fallback
-        document.body.style.minHeight = "";
-        window.scrollTo(0, 0);
+        // Only reset scroll if the fallback was active
+        if (galleryScrollHideActive.current) {
+          document.body.style.minHeight = "";
+          window.scrollTo(0, 0);
+          galleryScrollHideActive.current = false;
+        }
         // Exit fullscreen if active
         if (document.fullscreenElement) {
           document.exitFullscreen().catch(() => {});
@@ -101,8 +107,11 @@ export default function RootLayout({
   useEffect(() => {
     if (pathname !== "/projects") {
       const doc = document as any;
-      document.body.style.minHeight = "";
-      window.scrollTo(0, 0);
+      if (galleryScrollHideActive.current) {
+        document.body.style.minHeight = "";
+        window.scrollTo(0, 0);
+        galleryScrollHideActive.current = false;
+      }
       if (document.fullscreenElement) {
         document.exitFullscreen().catch(() => {});
       } else if (doc.webkitFullscreenElement) {
