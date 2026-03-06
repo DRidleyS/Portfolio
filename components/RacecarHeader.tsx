@@ -16,7 +16,9 @@ export default function RacecarHeader() {
   const [invertColors, setInvertColors] = useState(false);
   const [currentGear, setCurrentGear] = useState<number>(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
+  const headerRef = useRef<HTMLDivElement>(null);
   const cover1Ref = useRef<HTMLDivElement>(null);
   const cover2Ref = useRef<HTMLDivElement>(null);
   const cover3Ref = useRef<HTMLDivElement>(null);
@@ -243,6 +245,42 @@ export default function RacecarHeader() {
     };
   }, [isDragging]);
 
+  const toggleCollapse = () => {
+    if (!headerRef.current) return;
+    if (collapsed) {
+      gsap.to(headerRef.current, {
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+      setCollapsed(false);
+    } else {
+      // Close any open panel first
+      if (activePanel && panelRef.current) {
+        setActivePanel(null);
+        gsap.to(panelRef.current, {
+          height: 0,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+      }
+      gsap.to(headerRef.current, {
+        y: "-100%",
+        duration: 0.3,
+        ease: "power2.in",
+      });
+      setCollapsed(true);
+    }
+  };
+
+  // Start collapsed on mount
+  useEffect(() => {
+    if (headerRef.current) {
+      gsap.set(headerRef.current, { y: "-100%" });
+    }
+  }, []);
+
   useEffect(() => {
     // Update CSS variable for name color based on switches
     let nameColor = "#eab308"; // default yellow-500
@@ -259,10 +297,12 @@ export default function RacecarHeader() {
   return (
     <>
       <header
+        ref={headerRef}
         className="fixed top-0 left-0 right-0 z-50 border-b-2 border-neutral-700"
         style={{
           background: "linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%)",
           boxShadow: "0 4px 20px rgba(0, 0, 0, 0.8)",
+          overflow: "visible",
         }}
       >
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -660,6 +700,48 @@ export default function RacecarHeader() {
               "linear-gradient(90deg, transparent 0%, #444 50%, transparent 100%)",
           }}
         />
+
+        {/* Collapse/Expand Tab */}
+        <div
+          onClick={toggleCollapse}
+          className="cursor-pointer select-none"
+          style={{
+            position: "absolute",
+            bottom: "-28px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "120px",
+            height: "28px",
+            background: "linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%)",
+            borderLeft: "2px solid #444",
+            borderRight: "2px solid #444",
+            borderBottom: "2px solid #444",
+            borderRadius: "0 0 12px 12px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.6)",
+          }}
+        >
+          <svg
+            width="20"
+            height="12"
+            viewBox="0 0 20 12"
+            fill="none"
+            style={{
+              transform: collapsed ? "rotate(0deg)" : "rotate(180deg)",
+              transition: "transform 0.3s ease",
+            }}
+          >
+            <path
+              d="M2 2L10 10L18 2"
+              stroke="#888"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
       </header>
 
       {/* Info Panel */}
