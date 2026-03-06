@@ -50,8 +50,40 @@ export default function RootLayout({
     setIsClient(true);
     function checkMobileAndOrientation() {
       const mobile = window.innerWidth < 900;
+      const isPortrait = window.innerWidth < window.innerHeight;
       setIsMobile(mobile);
-      setShowRotatePrompt(mobile && window.innerWidth < window.innerHeight);
+      setShowRotatePrompt(mobile && isPortrait);
+
+      // Fullscreen management for mobile projects gallery in landscape
+      const onProjects = window.location.pathname === "/projects";
+      const doc = document as any;
+      const el = document.documentElement as any;
+
+      if (mobile && !isPortrait && onProjects) {
+        if (!document.fullscreenElement && !doc.webkitFullscreenElement) {
+          if (el.requestFullscreen) {
+            el.requestFullscreen().catch(() => {
+              // Fullscreen rejected — scroll to hide address bar instead
+              document.body.style.minHeight = "calc(100vh + 1px)";
+              setTimeout(() => window.scrollTo(0, 1), 100);
+            });
+          } else {
+            // No Fullscreen API (e.g. iOS Safari) — scroll to hide address bar
+            document.body.style.minHeight = "calc(100vh + 1px)";
+            setTimeout(() => window.scrollTo(0, 1), 100);
+          }
+        }
+      } else {
+        // Reset scroll fallback
+        document.body.style.minHeight = "";
+        window.scrollTo(0, 0);
+        // Exit fullscreen if active
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        } else if (doc.webkitFullscreenElement) {
+          doc.webkitExitFullscreen();
+        }
+      }
     }
     checkMobileAndOrientation();
     window.addEventListener("resize", checkMobileAndOrientation);
@@ -64,6 +96,20 @@ export default function RootLayout({
       );
     };
   }, []);
+
+  // Exit fullscreen / reset scroll fallback when navigating away from projects
+  useEffect(() => {
+    if (pathname !== "/projects") {
+      const doc = document as any;
+      document.body.style.minHeight = "";
+      window.scrollTo(0, 0);
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      } else if (doc.webkitFullscreenElement) {
+        doc.webkitExitFullscreen();
+      }
+    }
+  }, [pathname]);
 
   useEffect(() => {
     function checkDesktop() {
