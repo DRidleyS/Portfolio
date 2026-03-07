@@ -181,6 +181,7 @@ export default function GlobalNavShifter() {
   };
   const handleTouchMove = (e: TouchEvent) => {
     if (!isDragging || !shifterKnobRef.current) return;
+    e.preventDefault();
     const touch = e.touches[0];
     const deltaX = touch.clientX - dragStartPos.current.x;
     const deltaY = touch.clientY - dragStartPos.current.y;
@@ -223,7 +224,7 @@ export default function GlobalNavShifter() {
     if (isDragging) {
       window.addEventListener("mousemove", handleShifterDrag);
       window.addEventListener("mouseup", handleShifterDragEnd);
-      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchmove", handleTouchMove, { passive: false });
       window.addEventListener("touchend", handleTouchEnd);
     }
     return () => {
